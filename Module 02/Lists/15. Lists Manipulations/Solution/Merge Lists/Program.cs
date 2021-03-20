@@ -11,19 +11,23 @@ namespace Merge_Lists
         public static void Main()
         {
             List<string> lists = Console.ReadLine().Split('|').ToList();
+            List<string> newLists = new List<string>();
 
             for (int i = 0; i < lists.Count; i++)
             {
-                List<string> list = lists[i].Split(' ').ToList();
+                List<string> list = lists[i].Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries).ToList();
                 lists.RemoveAt(i);
-
+                i--;
+                list.Reverse();
                 for (int j = 0; j < list.Count; j++)
                 {
-                    lists.Add(list[j]);
+                    newLists.Add(list[j]);
                 }
             }
 
-            Console.WriteLine(string.Join(" ",lists));
+            newLists.Reverse();
+
+            Console.WriteLine(string.Join(" ",newLists));
         }
     }
 }
